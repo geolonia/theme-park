@@ -41,12 +41,21 @@
   map.on('load', function() {
     var hoverObj = null;
 
-    map.on('mouseenter', 'building', function(e) {
-      hoverObj = e.features[0].id
+    map.on('mousemove', 'building', function(e) {
+      if (hoverObj) {
+        map.setFeatureState(
+          { source: 'geolonia', sourceLayer: 'building', id: hoverObj },
+          { hover: false }
+        );
+
+        hoverObj = null
+      }
       map.setFeatureState(
-      { source: 'geolonia', sourceLayer: 'building', id: hoverObj },
-      { hover: true }
+        { source: 'geolonia', sourceLayer: 'building', id: e.features[e.features.length - 1].id },
+        { hover: true }
       );
+
+      hoverObj = e.features[e.features.length - 1].id
     });
 
     map.on('mouseleave', 'building', function(e) {
@@ -55,6 +64,8 @@
         { source: 'geolonia', sourceLayer: 'building', id: hoverObj },
         { hover: false }
         );
+
+        hoverObj = null
       }
     });
   })

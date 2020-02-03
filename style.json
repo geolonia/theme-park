@@ -516,13 +516,13 @@
       "source-layer": "building",
       "minzoom": 15,
       "paint": {
-        "fill-color": "#964A12",
         "fill-outline-color": "#ffffff",
-        "fill-opacity": [
+        "fill-opacity": 0.5,
+        "fill-color": [
           "case",
           ["boolean", ["feature-state", "hover"], false],
-          0.8,
-          1
+          "#ff0000",
+          "#964A12"
         ]
       }
     },
