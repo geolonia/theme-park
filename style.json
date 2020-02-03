@@ -517,13 +517,7 @@
       "minzoom": 15,
       "paint": {
         "fill-outline-color": "#ffffff",
-        "fill-opacity": 0.5,
-        "fill-color": [
-          "case",
-          ["boolean", ["feature-state", "hover"], false],
-          "#ff0000",
-          "#964A12"
-        ]
+        "fill-color": "#964A12"
       }
     },
     {

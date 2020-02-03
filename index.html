@@ -41,7 +41,24 @@
   map.on('load', function() {
     var hoverObj = null;
 
-    map.on('mousemove', 'building', function(e) {
+    map.addLayer({
+      "id": "building-hover",
+      "type": "fill",
+      "source": "geolonia",
+      "source-layer": "building",
+      "minzoom": 15,
+      "paint": {
+        "fill-outline-color": "#ffffff",
+        "fill-color": [
+          "case",
+          ["boolean", ["feature-state", "hover"], false],
+          "#ff0000",
+          "transparent"
+        ]
+      }
+    }, 'poi')
+
+    map.on('mousemove', 'building-hover', function(e) {
       if (hoverObj) {
         map.setFeatureState(
           { source: 'geolonia', sourceLayer: 'building', id: hoverObj },
@@ -58,7 +75,7 @@
       hoverObj = e.features[e.features.length - 1].id
     });
 
-    map.on('mouseleave', 'building', function(e) {
+    map.on('mouseleave', 'building-hover', function(e) {
       if (hoverObj) {
         map.setFeatureState(
         { source: 'geolonia', sourceLayer: 'building', id: hoverObj },
